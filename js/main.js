@@ -3,6 +3,7 @@ const navBtn = document.querySelector(".hamburger");
 const footerYear = document.querySelector(".footer__year");
 const mainBody = document.querySelector("body");
 const navLinks = document.querySelectorAll(".nav__link");
+const imgHeader = document.querySelector(".header__img");
 
 const handleNav = () => {
 	navBtn.classList.toggle("is-active");
@@ -11,16 +12,22 @@ const handleNav = () => {
 
 	navLinks.forEach(item => {
 		item.addEventListener("click", () => {
-            navBtn.classList.remove("is-active")
+			navBtn.classList.remove("is-active");
 			navMobile.classList.remove("nav-mobile--active");
 			mainBody.classList.remove("no-scroll");
 		});
 	});
-
-	// handleNavLinks();
-	// if (!navMobile.classList.contains("nav-mobile-active")) {
-	// 	handleObserver();
-	// }
+};
+const transparentNavBtn = () => {
+	const scrollObserver = window.scrollY;
+	if (scrollY > imgHeader.offsetHeight - 50) {
+		navBtn.classList.add("transparent");
+	} else {
+		navBtn.classList.remove("transparent");
+	}
+	if (navMobile.classList.contains("nav-mobile--active")) {
+		navBtn.classList.remove("transparent");
+	}
 };
 
 const handleCurrentYear = () => {
@@ -30,3 +37,5 @@ const handleCurrentYear = () => {
 
 handleCurrentYear();
 navBtn.addEventListener("click", handleNav);
+navBtn.addEventListener("click", transparentNavBtn);
+window.addEventListener("scroll", transparentNavBtn);

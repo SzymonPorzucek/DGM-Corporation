@@ -165,8 +165,35 @@ body {
   transition: top 0.1s 0.16s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
+.transparent {
+  opacity: 0.05;
+}
+
 .no-scroll {
   overflow: hidden;
+}
+
+.section-title {
+  letter-spacing: 2px;
+  position: relative;
+  margin: 0 auto 2em;
+  font-size: 3.2rem;
+  color: #d6c78e;
+  font-weight: 200;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.section-title::before {
+  position: absolute;
+  bottom: -0.1em;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #d6c78e;
+  content: "";
+}
+.section-title span {
+  font-weight: 900;
 }
 
 .header {
@@ -281,6 +308,108 @@ body {
   font-size: 5rem;
 }
 
+.cards {
+  background-color: #191919;
+  overflow: hidden;
+}
+.cards__box {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 2em;
+  padding: 6em 2em;
+}
+.cards__card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding: 3em;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: #232323;
+  transition: background-color 0.3s, border 0.3s;
+  z-index: 5;
+}
+.cards__card:hover {
+  background-color: #191919;
+  border: 1px solid #d6c78e;
+  z-index: 1;
+}
+.cards__card::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  border: 1px solid #d6c78e;
+  border-radius: 8px;
+  opacity: 0;
+}
+.cards__card:hover::before {
+  animation: pulse 1s;
+}
+.cards__card img {
+  margin-bottom: 1em;
+  width: 60px;
+}
+.cards__card h3 {
+  margin-bottom: 0.6m;
+  text-transform: uppercase;
+}
+.cards__card-one {
+  grid-row: 1/2;
+  grid-column: 1/-1;
+}
+.cards__card-two {
+  grid-row: 2/3;
+  grid-column: 1/-1;
+}
+.cards__card-three {
+  grid-row: 3/4;
+  grid-column: 1/-1;
+}
+
+.info {
+  position: relative;
+  display: grid;
+  grid-template-areas: "title title title" "box box box" "box box box";
+  padding: 6em 2em;
+}
+.info__title {
+  grid-area: title;
+}
+.info__boxes {
+  grid-area: box;
+}
+.info__box-img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: sepia();
+}
+.info__box-title {
+  margin: 0.3em 0;
+  font-size: 2.6rem;
+  color: #d6c78e;
+  font-weight: 200;
+}
+.info__box-text {
+  margin-bottom: 0.5em;
+}
+.info__box-link {
+  display: block;
+  margin-bottom: 2em;
+  color: #d6c78e;
+  text-decoration: none;
+  text-align: right;
+  transition: color 0.3s;
+}
+.info__box-link:hover {
+  color: #9b9165;
+}
+.info__bg-icon {
+  display: none;
+}
+
 .footer {
   text-align: center;
 }
@@ -288,12 +417,78 @@ body {
   color: #d6c78e;
 }
 
+@media (min-width: 576px) {
+  .info {
+    grid-template-areas: "title box" "title box" "title box";
+    padding: 10em 2em;
+  }
+  .info__box {
+    display: grid;
+    justify-content: end;
+  }
+  .info__title {
+    padding: 0 1em;
+  }
+  .info__box-img, .info__box-text {
+    max-width: 500px;
+  }
+  .info__bg-icon {
+    position: absolute;
+    display: block;
+    opacity: 0.05;
+    z-index: -5;
+  }
+  .info__bg-icon--one {
+    top: 14%;
+    width: 20%;
+    animation: rotate-right 160s infinite linear;
+  }
+  .info__bg-icon--two {
+    bottom: 10%;
+    left: 10%;
+    width: 30%;
+    animation: rotate-left 140s infinite linear;
+  }
+  .info__bg-icon--three {
+    top: 26%;
+    left: 16%;
+    width: 50%;
+    animation: rotate-left 160s infinite linear;
+  }
+  .info__bg-icon--four {
+    top: 55%;
+    left: -10%;
+    width: 15%;
+    animation: rotate-right 140s infinite linear;
+  }
+}
 @media (min-width: 768px) {
   .header__img {
     background-image: url(../img/bitcoin-headerimg.jpg);
   }
+  .cards__box {
+    padding: 10em 2em;
+  }
+  .cards__card-one {
+    grid-row: 1/2;
+    grid-column: 1/4;
+  }
+  .cards__card-two {
+    grid-row: 1/2;
+    grid-column: 4/7;
+  }
+  .cards__card-three {
+    grid-row: 1/2;
+    grid-column: 7/10;
+  }
 }
 @media (min-width: 992px) {
+  .section-title {
+    font-size: 4.8rem;
+  }
+  .section-title::before {
+    height: 4px;
+  }
   .header {
     grid-template-rows: auto repeat(2, 1fr);
   }
@@ -377,13 +572,14 @@ body {
   }
   .nav__link-home {
     color: #d6c78e;
-    padding: 0;
-    font-size: 3rem;
+    margin-top: auto;
+    padding: 0.3;
+    font-size: 3.7rem;
   }
   .nav__link-home:hover::before {
     animation: none;
   }
-  .nav .hamburger {
+  .hamburger {
     display: none;
   }
 }/*# sourceMappingURL=main.css.map */
