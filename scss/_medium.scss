@@ -1,0 +1,15 @@
+@use "./reset" as *;
+@use "./colors" as *;
+@use "./animations" as *;
+@media (min-width: 768px) {
+    .header{
+        &__img{
+            background-image: url(../img/bitcoin-headerimg.jpg);
+        }
+    }
+// // .nav {
+// // 		&-mobile {
+// // 			display: none;
+// // 		}
+// // 	}
+}
