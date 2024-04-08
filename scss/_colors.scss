@@ -1,4 +1,5 @@
 $white: #fff;
+$white-opacity01: rgba(255, 255, 255, 0.1);
 $gold: #d6c78e;
 $darkgold: #9b9165;
 $red: #a01c35;
@@ -6,4 +7,8 @@ $dark: #232323;
 $darker: #191919;
 $shadow-header: rgba(0, 0, 0, 0.43);
 $gray: rgb(103, 102, 100);
-$gray-gradient: linear-gradient(to left bottom, rgb(79, 77, 75), rgb(42, 42, 56));
+$gray-gradient: linear-gradient(
+	to left bottom,
+	rgb(79, 77, 75),
+	rgb(42, 42, 56)
+);
